@@ -1,0 +1,89 @@
+﻿@*@model IEnumerable<Assignment2.Models.StoreInventory>
+    *@
+    @model PaginatedList<Assignment2.Models.StoreInventory>
+
+
+        @{
+        ViewData["Title"] = "Store Inventory - Melbourne CBD";
+        }
+
+        <h2>Store Inventory - @ViewBag.StoreName</h2>
+
+
+
+        <form method="post" asp-route-store="@ViewBag.StoreID">
+            <p>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label name="StoreID" class="control-label"></label>
+                            <select name="StoreID" class="form-control" asp-items="ViewBag.StoreID"></select><br>
+                            Filter By Product Name: <input name="productName" value="@ViewBag.ProductName" />
+                        </div>
+                    </div>
+                </div>
+                <input type="submit" value="Filter" />
+            </p>
+        </form>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        <label>Product ID:</label>
+                    </th>
+                    <th>
+                        <label>Product Name:</label>                       
+                    </th>
+                    <th>
+                        <label>Product StockLevel:</label>                      
+                    </th>
+                    <th>
+                        <label>Product Price:</label>                      
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Product.ProductID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Product.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StockLevel)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Product.Price) $
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.ProductID" asp-route-store="@item.StoreID">Add To Cart</a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+
+        @{
+        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+        }
+
+        <a asp-action="Index"
+           asp-route-sortOrder="@ViewData[" CurrentSort"]"
+           asp-route-page="@(Model.PageIndex - 1)"
+           asp-route-currentFilter="@ViewData[" CurrentFilter"]"
+           class="btn btn-default @prevDisabled">
+            Previous
+        </a>
+        <a asp-action="Index"
+           asp-route-sortOrder="@ViewData[" CurrentSort"]"
+           asp-route-page="@(Model.PageIndex + 1)"
+           asp-route-currentFilter="@ViewData[" CurrentFilter"]"
+           class="btn btn-default @nextDisabled">
+            Next
+        </a>

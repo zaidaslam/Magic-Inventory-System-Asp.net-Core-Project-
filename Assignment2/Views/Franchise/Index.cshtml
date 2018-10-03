@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Assignment2.Models.StoreInventory>
+
+@{
+    ViewData["Title"] = "Store Inventory - Melbourne CBD";
+}
+
+<h2>Store Inventory - @ViewBag.StoreName</h2>
+
+
+
+<form method="post">
+    <p>
+       <div class="row">
+       <div class="col-md-4">
+       <div class="form-group">
+       <label name="StoreID" class="control-label"></label>
+       <select name="StoreID" class="form-control" asp-items="ViewBag.StoreID"></select>
+       </div>
+       </div>
+       </div>
+       <input type="submit" value="Filter" />
+    </p>
+</form>
+
+@if (Model == null)
+{
+    <h3>Access Denied</h3>
+}
+else
+{
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.StockLevel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StockLevel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.ProductID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.Name)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ProductID" asp-route-store="@item.StoreID" asp-route-stocklevel="@item.StockLevel">Create New StockRequest</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+}

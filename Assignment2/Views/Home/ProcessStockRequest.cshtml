@@ -1,0 +1,42 @@
+﻿@model Assignment2.Models.StockRequest
+
+@{
+    ViewData["Title"] = "Process Request";
+}
+
+<h2>Process Request</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="ProcessStockRequest" asp-route-id="@ViewBag.ProductID">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <label>Stock Request ID : </label>
+            <label name="ProductID">@ViewBag.ProductID</label><br>
+            <label>Product Name : </label>
+            <label name="StoreID">@ViewBag.ProductName</label><br>
+            <label>Quantity : </label>
+            <label>@ViewBag.Quantity</label><br>
+            <label>Current Stock : </label>
+            <label>@ViewBag.CurrentStock</label><br>
+            <label>Stock Availability : </label>
+            <label>@ViewBag.Availability</label><br>
+            <label>@ViewBag.Aval</label>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="StockRequest">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+
+
+

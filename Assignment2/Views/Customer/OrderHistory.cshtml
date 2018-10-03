@@ -1,0 +1,31 @@
+﻿@model IEnumerable<int>
+@{
+    ViewData["Title"] = "OrderHistory";
+}
+
+<h2>Order History</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <label>Order History</label>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-action="OrderDetails" asp-route-id="@item">OrderID: @item</a>
+                </td>
+                <td></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

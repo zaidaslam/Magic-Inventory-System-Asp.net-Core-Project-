@@ -1,0 +1,65 @@
+﻿@model IEnumerable<OwnerInventory>
+@{
+    ViewData["Title"] = "NewItem";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>AddNewItem</h2>
+
+<form method="post">
+    <p>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label name="StoreID" class="control-label"></label>
+                    <select name="StoreID" class="form-control" asp-items="ViewBag.StoreID"></select>
+                </div>
+            </div>
+        </div>
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+
+@if (Model == null)
+{
+    <h3>Access Denied</h3>
+}
+else
+{
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProductID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Product.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StockLevel)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Product.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StockLevel)
+                    </td>
+                    <td>
+                        <a asp-action="Add" asp-route-id="@item.ProductID" asp-route-name="@item.Product.Name" asp-route-stocklevel="@item.StockLevel" asp-route-store=" @ViewBag.StID">Add Item</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

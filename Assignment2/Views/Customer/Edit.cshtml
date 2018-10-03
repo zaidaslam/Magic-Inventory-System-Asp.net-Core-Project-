@@ -1,0 +1,34 @@
+﻿@model Assignment2.Models.StoreInventory
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h4>StoreInventory</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" asp-route-id="@ViewBag.ProductID" asp-route-store="@ViewBag.StoreID">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <label>Product Name :</label>
+            <label>@ViewBag.ProductName</label><br>
+            <label>Store Name :</label>
+            <label>@ViewBag.StoreName</label><br>
+            <div class="form-group">
+                <label asp-for="StockLevel" class="control-label">Quantity</label>
+                <input asp-for="StockLevel" class="form-control" />
+                <span asp-validation-for="StockLevel" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Add" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

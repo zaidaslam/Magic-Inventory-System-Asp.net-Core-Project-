@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Assignment2.Models.Order>
+
+@{
+    ViewData["Title"] = "OrderConfirmation";
+}
+
+<h2>OrderConfirmation</h2>
+
+ <h3>Order ID: @ViewBag.Creditcheck</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <label>Product Name:</label>
+            </th>
+            <th>
+                <label>Store Name:</label>
+            </th>
+            <th>
+                <label>Quantity:</label>
+            </th>
+            <th>
+                <label>Price:</label>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{ var gt = 0.0;}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Store.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @{ var price = item.Product.Price * item.Quantity;}
+                    @Html.DisplayFor(modelItem => price) $
+                    @{
+                        gt = gt + price;}
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h3>Grand Total : @Html.DisplayFor(modelItem => gt) $</h3>

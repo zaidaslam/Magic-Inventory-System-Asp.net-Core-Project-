@@ -1,0 +1,39 @@
+﻿@model Assignment2.Models.OwnerInventory
+
+@{
+    ViewData["Title"] = "Add Item";
+}
+
+<h2>ADD ITEM</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Add" asp-route-id="@ViewBag.ProductID" asp-route-store="@ViewBag.StoreID" asp-route-stocklevel="@ViewBag.StockLevel">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <label>Product ID : </label>
+            <label name="ProductID">@ViewBag.ProductID</label><br>
+            <label>Store ID : </label>
+            <label name="StoreID">@ViewBag.StoreID</label><br>
+            <label>Product Name : </label>
+            <label>@ViewBag.ProductName</label>
+            <div class="form-group">
+                <label>Quantity : </label>
+                <input asp-for="StockLevel" class="form-control" />
+                <span asp-validation-for="StockLevel" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+            <h3>@ViewBag.Message</h3>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="AddNewItem">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

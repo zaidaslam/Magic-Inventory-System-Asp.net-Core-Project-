@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Assignment2.Models.Order>
+
+@{
+    ViewData["Title"] = "Order Details";
+}
+
+<h2>Order Details</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <label>Product Name:</label>
+            </th>
+            <th>
+                <label>Store Name:</label>
+            </th>
+            <th>
+                <label>Quantity:</label>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Store.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td></td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <a asp-action="OrderHistory">Back to List</a>
+</div>

@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Assignment2.Models.Cart>
+
+@{
+    ViewData["Title"] = "Cart";
+}
+
+<h2>Cart</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <label>Product Name:</label>
+            </th>
+            <th>
+                <label>Store Name:</label>
+            </th>
+            <th>
+                <label>Quantity:</label>
+            </th>
+            <th>
+                <label>Total Price:</label>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{ var gt = 0.0;}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Store.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @{ var price = item.Product.Price * item.Quantity;}
+                    @Html.DisplayFor(modelItem => price) $
+                    @{
+                        gt = gt + price;}
+                </td>
+                <td>
+                    <a asp-action="EditCart" asp-route-id="@item.ProductID" asp-route-store="@item.StoreID">Edit Cart</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ProductID" asp-route-store="@item.StoreID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h3>Grand Total : @Html.DisplayFor(modelItem => gt) $</h3>
+
+<form asp-action="CreditCard">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+       <label> @ViewBag.check</label><br>
+        <input type="submit" value="Checkout" class="btn btn-default" />
+    </div>
+</form>
+

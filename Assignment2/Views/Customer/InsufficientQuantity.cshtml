@@ -1,0 +1,17 @@
+﻿@model List<String>
+
+@{
+    ViewData["Title"] = "Out Of Stock";
+}
+
+<h2>List of Products Out Of Stock</h2><br>
+
+@foreach (var item in Model) { 
+
+    <li>@item</li><br>
+}
+
+<br>
+    <div>
+        <a asp-action="Cart" class="btn btn-default">Update Cart</a>
+    </div>
